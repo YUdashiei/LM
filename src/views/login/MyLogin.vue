@@ -3,18 +3,20 @@
     <img class="wrapper__img" src="http://www.dell-lee.com/imgs/vue3/user.png"/>
     <div class="wrapper__input">
       <input class="wrapper__input__content"
-       placeholder="请输入用户名"
+       placeholder="用户名"
        v-model="data.username"
        ></div>
     <div class="wrapper__input">
-      <input class="wrapper__input__content"
-        placeholder="请输入密码"
+      <input
         type="password"
+        class="wrapper__input__content"
+        placeholder="请输入密码"
         v-model="data.password"
          />
     </div>
     <div class="wrapper__login-button" @click="handleLogin">登陆</div>
     <div class="wrapper__login-link"  @click="handleRegisterClick">立即注册</div>
+    <MyToast />
   </div>
 </template>
 
@@ -22,9 +24,11 @@
 import { useRouter } from 'vue-router'
 import { post } from '../../utils/request'
 import { reactive } from 'vue'
+import MyToast from '../../components/MyToast'
 
 export default {
   name: 'MyLogin',
+  components: { MyToast },
   setup () {
     const data = reactive({
       username: '',
@@ -34,8 +38,8 @@ export default {
     const handleLogin = async () => {
       try {
         const result = await post('/api/user/login', {
-          username: 'data.username',
-          password: 'data.password'
+          username: data.username,
+          password: data.password
         })
         if (result?.errno === 0) {
           localStorage.isMyLogin = true
