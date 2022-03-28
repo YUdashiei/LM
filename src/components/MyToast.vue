@@ -1,10 +1,26 @@
 <template>
-    <div class="toast">内容</div>
+    <div class="toast">{{message}}</div>
 </template>
 
 <script>
+import { reactive } from 'vue'
 export default {
-
+  props: ['message']
+}
+export const useToastEffect = () => {
+  const toastData = reactive({
+    showToast: false,
+    toastMessage: ''
+  })
+  const showToast = (message) => {
+    toastData.showToast = true
+    toastData.toastMessage = '登陆失败'
+    setTimeout(() => {
+      toastData.showToast = false
+      toastData.toastMessage = ''
+    }, 2000)
+  }
+  return { toastData, showToast }
 }
 </script>
 
@@ -15,7 +31,7 @@ export default {
         top:50%;
         transform: translate(-50%, -50%);
         padding: .1rem;
-        background-color: rgba(0, 0, 0, .35);
+        background: rgba(0, 0, 0, .35);
         border-radius: .05rem;
         color: #fff;
     }
