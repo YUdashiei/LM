@@ -3,7 +3,7 @@
     <img class="wrapper__img" src="http://www.dell-lee.com/imgs/vue3/user.png"/>
     <div class="wrapper__input">
       <input class="wrapper__input__content"
-       placeholder="用户名"
+       placeholder="请输入  用户名"
        v-model="username"
        ></div>
     <div class="wrapper__input">

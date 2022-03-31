@@ -43,7 +43,7 @@ const useRegisterEffect = (showToast) => {
 
   const handleRegister = async () => {
     try {
-      const result = await post('/api/user/request', {
+      const result = await post('/api/user/register', {
         username: data.username,
         password: data.password
       })
@@ -71,7 +71,7 @@ export default {
   components: { MyToast },
   setup () {
     const { show, toastMessage, showToast } = useToastEffect()
-    const { username, password, ensurement, handleRegister } = useRegisterEffect()
+    const { username, password, ensurement, handleRegister } = useRegisterEffect(showToast)
     const { handleLoginClick } = useLoginEffect()
     return { toastMessage, showToast, show, username, password, ensurement, handleRegister, handleLoginClick }
   }
