@@ -2,7 +2,7 @@
   <div class="docker">
     <div
       v-for="(item, index) in dockerList"
-      :class="{'docker__item': true, 'docker__item--active': index === 0}"
+      :class="{'docker__item': true, 'docker__item--active': index === currentIndex}"
       :key="item.icon"
       >
       <router-link :to='item.to'>
@@ -16,12 +16,13 @@
 <script>
 export default {
   name: 'MyDocker',
+  props: ['currentIndex'],
   setup () {
     const dockerList = [
       { icon: '&#xe8b9;', text: '首页', to: { name: 'MyHome' } },
       { icon: '&#xe70c;', text: '购物车', to: { name: 'MyCartList' } },
-      { icon: '&#xe789;', text: '订单', to: { name: 'MyHome' } },
-      { icon: '&#xe600;', text: '我的', to: { name: 'MyHome' } }
+      { icon: '&#xe789;', text: '订单', to: { name: 'MyOrderList' } },
+      { icon: '&#xe600;', text: '我的', to: { name: 'MyPersonalInfo' } }
     ]
     return { dockerList }
   }
@@ -29,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../style/viriables.scss';
+@import '../style/viriables.scss';
 .docker {
   display: flex;
   box-sizing: border-box;
@@ -39,7 +40,7 @@ export default {
   bottom: 0;
   width: 100%;
   height: .49rem;
-  border-top: 1px solid $content-bgColor;
+  border-top: .01rem solid $content-bgColor;
   color: $content-fontcolor;
   &__item {
     flex: 1;

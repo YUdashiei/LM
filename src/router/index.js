@@ -9,13 +9,33 @@ const routes = [
     name: 'MyHome',
     component: () => import(/* webpackChunkName: "home" */ '../views/home/MyHome')
   }, {
-    path: '/ordercomfirmation/:id',
-    name: 'MyOrderComfirmation',
-    component: () => import(/* webpackChunkName: "ordercomfirmation" */ '../views/ordercomfirmation/MyOrderComfirmation')
+    path: '/orderConfirmation/:id',
+    name: 'MyOrderConfirmation',
+    component: () => import(/* webpackChunkName: "orderConfirmation" */ '../views/orderConfirmation/MyOrderConfirmation')
+  }, {
+    path: '/orderList',
+    name: 'MyOrderList',
+    component: () => import(/* webpackChunkName: "orderList" */ '../views/orderList/MyOrderList')
   }, {
     path: '/cartList',
     name: 'MyCartList',
-    component: () => import(/* webpackChunkName: "cartList" */ '../views/cartlist/MyCartList')
+    component: () => import(/* webpackChunkName: "cartList" */ '../views/cartList/MyCartList')
+  }, {
+    path: '/personalInfo',
+    name: 'MyPersonalInfo',
+    component: () => import(/* webpackChunkName: "personalInfo" */ '../views/personalInfo/MyPersonalInfo')
+  }, {
+    path: '/myAddressList',
+    name: 'MyAddressList',
+    component: () => import(/* webpackChunkName: "myAddressList" */ '../views/myAddressList/MyAddressList')
+  }, {
+    path: '/chooseAddressList/:shopId',
+    name: 'MyChooseAddressList',
+    component: () => import(/* webpackChunkName: "chooseAddressList" */ '../views/chooseAddressList/MyChooseAddressList')
+  }, {
+    path: '/upsertAddress/:id?',
+    name: 'UpsertAddress',
+    component: () => import(/* webpackChunkName: "upsertAddress" */ '../views/upsertAddress/UpsertAddress')
   }, {
     path: '/register',
     name: 'MyRegister',

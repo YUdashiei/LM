@@ -8,11 +8,16 @@ const setLocalCartList = (state) => {
 
 const getLocaCartList = () => {
   // { shopId: {shopName:'', productList:{ productId: {} }}}
-  return JSON.parse(localStorage.cartList) || {}
+  try {
+    return JSON.parse(localStorage.cartList)
+  } catch (e) {
+    return {}
+  }
 }
 export default Vuex.createStore({
   state: {
-    cartList: getLocaCartList()
+    cartList: getLocaCartList(),
+    addressList: []
   },
   mutations: {
     changeCartItemInfo (state, payload) {
@@ -62,6 +67,12 @@ export default Vuex.createStore({
         }
       }
       setLocalCartList(state)
+    },
+    clearCartData (state, shopId) {
+      state.cartList[shopId].productList = {}
+    },
+    changeAddressList (state, addressList) {
+      state.addressList.splice(0, state.addressList.length, ...addressList)
     }
   },
   actions: {

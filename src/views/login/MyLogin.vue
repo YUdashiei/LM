@@ -3,7 +3,7 @@
     <img class="wrapper__img" src="http://www.dell-lee.com/imgs/vue3/user.png"/>
     <div class="wrapper__input">
       <input class="wrapper__input__content"
-       placeholder="请输入  用户名"
+       placeholder="请输入用户名"
        v-model="username"
        ></div>
     <div class="wrapper__input">
@@ -89,11 +89,12 @@ export default {
     margin: 0 .4rem .16rem .4rem;
     padding: 0 .16rem;
     background: #F9F9F9;
-    border: 1px solid rgba(0,0,0,0.10);
-    border-radius: 6px;
-    border-radius: 6px;
+    border: .01rem solid rgba(0,0,0,0.10);
+    border-radius: .06rem;
+    border-radius: .06rem;
     &__content {
-      line-height: .48rem;
+      margin-top: .12rem;
+      line-height: .22rem;
       border: none;
       outline: none;
       width: 100%;

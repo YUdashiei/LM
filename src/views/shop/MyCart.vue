@@ -23,11 +23,11 @@
           >清空购物车</span>
         </div>
       </div>
-      <template
-        v-for="(item) in productList"
-        :key="item._id"
-      >
-        <div class="product__item" v-if="item.count > 0">
+        <div
+          v-for="(item) in productList"
+          :key="item._id"
+          class="product__item"
+          >
           <div
           class="product__item__checked iconfont"
           v-html="item.check ? '&#xe70f;' : '&#xe619;'"
@@ -43,17 +43,16 @@
           </p>
         </div>
         <div class="product__number">
-          <span class="product__number__minus"
+          <span class="product__number__minus iconfont"
           @click="() => { changeCartItemInfo(shopId, item._id, item, -1) }"
-          >-</span>
+          >&#xe8b1;</span>
           {{item.count || 0 }}
           <span
-          class="product__number__plus"
+          class="product__number__plus iconfont"
           @click="() => { changeCartItemInfo(shopId, item._id, item, 1) }"
-          >+</span>
+          >&#xe8c8;</span>
         </div>
       </div>
-      </template>
   </div>
     <div class="check">
       <div class="check__icon">
@@ -67,8 +66,8 @@
       <div class="check__info">
         总计：<span class="check__info__price">&yen;{{calculations.price}}</span>
       </div>
-      <div class="check__btn">
-        <router-link :to="{path:`/ordercomfirmation/${shopId}`}">
+      <div class="check__btn" v-show="calculations.total > 0">
+        <router-link :to="{path: `/orderConfirmation/${shopId}`}">
         去结算
         </router-link>
       </div>
@@ -77,40 +76,15 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import { useCommonCartEffect } from './commonCartEffect'
+import { useCommonCartEffect } from './../../effects/cartEffects'
 
 // 获取购物车信息逻辑
 const useCartEffect = (shopId) => {
   const store = useStore()
-  const { cartList, changeCartItemInfo } = useCommonCartEffect()
-
-  const calculations = computed(() => {
-    const productList = cartList[shopId]?.productList
-    const result = { total: 0, price: 0, allChecked: true }
-    if (productList) {
-      for (const i in productList) {
-        const product = productList[i]
-        result.total += product.count
-        if (product.check) {
-          result.price += (product.count * product.price)
-        }
-        if (product.count > 0 && !product.check) {
-          result.allChecked = false
-        }
-      }
-    }
-    result.price = result.price.toFixed(2)
-    return result
-  })
-
-  const productList = computed(() => {
-    const productList = cartList[shopId]?.productList || []
-    return productList
-  })
-
+  const { calculations, productList, changeCartItemInfo } = useCommonCartEffect(shopId)
   const changeCartItemChecked = (shopId, productId) => {
     store.commit('changeCartItemChecked', { shopId, productId })
   }
@@ -172,7 +146,7 @@ export default {
   &__header {
     display: flex;
     line-height: .52rem;
-    border-bottom: 1px solid $content-bgColor;
+    border-bottom: .01rem solid $content-bgColor;
     font-size: .14rem;
     color: $content-fontcolor;
     &__all {
@@ -241,25 +215,13 @@ export default {
     .product__number {
       position: absolute;
       right: 0;
-      bottom: .12rem;
-      &__minus,
-      &__plus {
-        display: inline-block;
-        width: .2rem;
-        height: .2rem;
-        line-height: .16rem;
-        border-radius: 50%;
-        font-size: .2rem;
-        text-align: center;
-      }
+      bottom: .26rem;
       &__minus {
-        border: .01rem solid $medium-fontColor;
         color: $medium-fontColor;
         margin-right: .05rem;
       }
       &__plus {
-        background: $btn-bgColor;
-        color: $bgColor;
+        color: $btn-bgColor;
         margin-left: .05rem;
       }
     }
